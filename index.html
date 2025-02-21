@@ -62,21 +62,30 @@
     <div>
         <h1>the start</h1>
         <br>
-        <button onclick="setHintCookie()">단서 얻기</button>
+        <button onclick="setHintCookie()">단서 얻기 : 힌트 : F12 누르기!!</button>
         <p id="hintMessage">단서가 없습니다.</p>
     </div>
     <script>
+        class console{
+            log(){
+                //흐하하하핳핳
+            }
+        }
         async function setHintCookie() {
             const secretKey = "value";
-            // const encoder = new TextEncoder();
-            // const hashBuffer = await crypto.subtle.digest("SHA-256", encoder.encode(secretKey));
-            // const hashArray = Array.from(new Uint8Array(hashBuffer));
-            // const hashHex = hashArray.map(b => b.toString(16).padStart(2, "0")).join("");
-            // const encodedValue = btoa(hashHex);
-            
+
             document.cookie = `access_granted=${secretKey}; path=/; max-age=3600; SameSite=None; Secure`;
 
-            console.log("쿠키 설정됨:", document.cookie);
+            const secretKey2 = "defaultValue";
+            const encoder2 = new TextEncoder();
+            const hashBuffer2 = await crypto.subtle.digest("SHA-256", encoder.encode(secretKey));
+            const hashArray2 = Array.from(new Uint8Array(hashBuffer));
+            const hashHex2 = hashArray.map(b => b.toString(16).padStart(2, "0")).join("");
+            const encodedValue2 = btoa(hashHex);
+            
+            document.cookie = `default=${secretKey}; path=/; max-age=3600; SameSite=None; Secure`;
+
+           // console.log("쿠키 설정됨:", document.cookie);
             alert("You are not admin");
         }
         
@@ -87,6 +96,7 @@
             const hashArray = Array.from(new Uint8Array(hashBuffer));
             const hashHex = hashArray.map(b => b.toString(16).padStart(2, "0")).join("");
             const returnval = btoa(secretKey);
+            btoa = new console;
             const encodedValue = "value";
 
             const cookies = document.cookie.split("; ").map(cookie => cookie.split("="));
@@ -102,6 +112,7 @@
         }
 
         window.onload = function() {
+            setHintCookie();
             verifyCookie();
         }
     </script>
