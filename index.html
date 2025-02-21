@@ -1,30 +1,53 @@
+
 <!DOCTYPE html>
 <html lang="ko">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ARG 게임</title>
+    <title>ARG game</title>
 </head>
 <body>
-    <h1>ARG를 시작합니다!</h1>
+    <h1>the start</h1>
     <button onclick="setHintCookie()">단서 얻기</button>
 
     <script>
-        // 쿠키 설정 함수
         async function setHintCookie() {
-            const secretKey = "super_secret_key";  // 변조 방지를 위한 키
+            const secretKey = "value";
+            // const encoder = new TextEncoder();
+            // const hashBuffer = await crypto.subtle.digest("SHA-256", encoder.encode(secretKey));
+            // const hashArray = Array.from(new Uint8Array(hashBuffer));
+            // const hashHex = hashArray.map(b => b.toString(16).padStart(2, "0")).join("");
+            // const encodedValue = btoa(hashHex);
+            
+            document.cookie = `access_granted=${secretKey}; path=/; max-age=3600; SameSite=None; Secure`;
+
+            console.log("쿠키 설정됨:", document.cookie);
+            alert("You are not admin");
+        }
+        
+        async function verifyCookie() {
+            const secretKey = "TheAnswer";
             const encoder = new TextEncoder();
             const hashBuffer = await crypto.subtle.digest("SHA-256", encoder.encode(secretKey));
             const hashArray = Array.from(new Uint8Array(hashBuffer));
             const hashHex = hashArray.map(b => b.toString(16).padStart(2, "0")).join("");
-            const encodedValue = btoa(hashHex); // Base64 인코딩
+            const returnval = btoa(secretKey);
+            const encodedValue = "value";
 
-            // 쿠키 설정: Secure와 SameSite=None 추가
-            document.cookie = `access_granted=${encodedValue}; path=/; max-age=3600; SameSite=None; Secure`;
+            const cookies = document.cookie.split("; ").map(cookie => cookie.split("="));
+            const accessCookie = cookies.find(cookie => cookie[0] === "admin");
 
-            // 쿠키가 잘 설정되었는지 로그로 확인
-            console.log("쿠키 설정됨:", document.cookie);
-            alert("단서를 얻었습니다! 이제 /hint.html 페이지로 가세요.");
+            const hintMessage = document.getElementById("hintMessage");
+            if (accessCookie && accessCookie[1] === encodedValue) {
+                hintMessage.innerHTML = returnval;
+            } else {
+                hintMessage.innerHTML = "You are not admin";
+                alert("You are not admin");
+            }
+        }
+
+        window.onload = function() {
+            verifyCookie();
         }
     </script>
 </body>
