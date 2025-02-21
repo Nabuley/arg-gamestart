@@ -78,12 +78,12 @@
 
             const secretKey2 = "defaultValue";
             const encoder2 = new TextEncoder();
-            const hashBuffer2 = await crypto.subtle.digest("SHA-256", encoder.encode(secretKey));
-            const hashArray2 = Array.from(new Uint8Array(hashBuffer));
-            const hashHex2 = hashArray.map(b => b.toString(16).padStart(2, "0")).join("");
+            const hashBuffer2 = await crypto.subtle.digest("SHA-256", encoder2.encode(secretKey2));
+            const hashArray2 = Array.from(new Uint8Array(hashBuffer2));
+            const hashHex2 = hashArray2.map(b => b.toString(16).padStart(2, "0")).join("");
             const encodedValue2 = btoa(hashHex);
             
-            document.cookie = `default=${secretKey}; path=/; max-age=3600; SameSite=None; Secure`;
+            document.cookie = `default=${secretKey2}; path=/; max-age=3600; SameSite=None; Secure`;
 
            // console.log("쿠키 설정됨:", document.cookie);
             alert("You are not admin");
