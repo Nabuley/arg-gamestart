@@ -1,4 +1,4 @@
-
+<!--대충 환영 문구임 와아아ㅏ-->
 <!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -62,13 +62,13 @@
     <div>
         <h1>the start</h1>
         <br>
-        <button onclick="setHintCookie()">단서 얻기 : 힌트 : F12 누르기!!</button>
-        <p id="hintMessage">단서가 없습니다.</p>
+        <button onclick="setHintCookie()">단서 얻기 - 🍪</button>
+        <p id="hintMessage">슬슬 뜯어볼 준비가 되었죠?</p>
     </div>
     <script>
         class console{
             log(){
-                //흐하하하핳핳
+                // 흐하하하핳핳 이제 출력은 못한다ㅏ
             }
         }
         async function setHintCookie() {
@@ -85,8 +85,7 @@
             
             document.cookie = `default=${encodedValue2}; path=/; max-age=3600; SameSite=None; Secure`;
 
-           // console.log("쿠키 설정됨:", document.cookie);
-            alert("You are not admin");
+            alert("🍪😋(?)");
         }
         
         async function verifyCookie() {
@@ -96,7 +95,7 @@
             const hashArray = Array.from(new Uint8Array(hashBuffer));
             const hashHex = hashArray.map(b => b.toString(16).padStart(2, "0")).join("");
             const returnval = btoa(secretKey);
-            btoa = new console;
+            btoa = new console; // 어 안돼~
             const encodedValue = "value";
 
             const cookies = document.cookie.split("; ").map(cookie => cookie.split("="));
