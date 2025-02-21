@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ARG 시작</title>
+</head>
+<body>
+    <h1>ARG를 시작합니다!</h1>
+    <button onclick="setHintCookie()">단서 얻기</button>
+
+    <script>
+        async function setHintCookie() {
+            const secretKey = "super_secret_key";  // 변조 방지를 위한 키
+            const encoder = new TextEncoder();
+            const hashBuffer = await crypto.subtle.digest("SHA-256", encoder.encode(secretKey));
+            const hashArray = Array.from(new Uint8Array(hashBuffer));
+            const hashHex = hashArray.map(b => b.toString(16).padStart(2, "0")).join("");
+            const encodedValue = btoa(hashHex); // Base64 인코딩
+
+            // 쿠키 설정 시 SameSite=None 추가 및 Secure 설정 (HTTPS 필요)
+            document.cookie = `access_granted=${encodedValue}; path=/; max-age=3600; SameSite=None; Secure`;
+            console.log("쿠키 설정됨:", document.cookie);  // 콘솔로 확인
+
+            alert("단서를 얻었습니다! 이제 /hint.html 페이지로 가세요.");
+        }
+    </script>
+</body>
+</html>
