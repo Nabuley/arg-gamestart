@@ -84,7 +84,7 @@
                 const hashHex2 = hashArray2.map(b => b.toString(16).padStart(2, "0")).join("");
                 const encodedValue2 = btoa(hashHex2);
                 
-                document.cookie = `default=${encodedValue2}; path=/; max-age=3600; SameSite=None; Secure`;
+                document.cookie = `default=${encodedValue2.slice(0, -2)}; path=/; max-age=3600; SameSite=None; Secure`;
             } catch {
                 // 지금 오전 4시 27분임 흐핳
             } finally {
